@@ -1,7 +1,12 @@
 use math::Permutation;
 use std::{collections::BTreeMap, time::Instant};
 
-const N: usize = 999;
+// The n corresponding to C_n
+const N: usize = 8;
+// Set to true if you want to see the elements, false otherwise
+// WARN: For large N this will overfill your console (use false for large N)
+const DISPLAY: bool = true;
+
 fn main() {
     let now = Instant::now();
 
@@ -9,6 +14,9 @@ fn main() {
     let rotation = Permutation::<N>::rotation();
     let mut cycle_count = BTreeMap::new();
     for _ in 0..N {
+        if DISPLAY {
+            nth_rotation.display();
+        }
         // Counts the number of elements with each cycle length
         cycle_count
             .entry(nth_rotation.first_cycle_length())
